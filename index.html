@@ -1,35 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Rails Girls Tutorial 2023</title>
 
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Bootstrap 5.3 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <header class="header text-white py-5">
-    <div class="container">
-      <h1 class="h3">Rails Girls Tutorial</h1>
-    </div>
+  <header class="header text-white py-4">
+    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="https://railsgirls.com/images/railsgirls-logo.png" alt="Logo" height="20" class="d-inline-block align-text-top me-2">
+          Tutorial
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#tools">Tools</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#internet">Internet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#html">HTML</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#ruby">Ruby</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#rails">Rails</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#more">More</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
+
 
   <main class="bg-light text-dark py-5">
     <div class="container">
-      <p>TBA</p>
+      <section id="tools">
+        <h2 class="h3">Tools</h2>
+        <p>TBA</p>
+      </section>
+
+      <hr class="my-5" />
+
+      <section id="internet">
+        <h2 class="h3">How Internet Works</h2>
+        <p>TBA</p>
+      </section>
+
+      <hr class="my-5" />
+
+      <section id="html">
+        <h2 class="h3">Pure HTML</h2>
+        <p>TBA</p>
+      </section>
+
+      <hr class="my-5" />
+
+      <section id="ruby">
+        <h2 class="h3">Static vs. Dynamic Pages</h2>
+        <p>TBA</p>
+      </section>
+
+      <hr class="my-5" />
+
+      <section id="rails">
+        <h2 class="h3">Build Your First Rails App</h2>
+        <p>TBA</p>
+      </section>
+
+      <hr class="my-5" />
     </div>
   </main>
 
   <footer class="footer text-dark py-5">
     <div class="container">
-      &copy; Klaudia Biała
+      2023 Klaudia Biała
+      <a href="https://github.com/kbiala" target="_blank">
+        <img alt="GH logo"
+             height="17"
+             class="d-inline-block align-text-top ms-1"
+             src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" />
+      </a>
     </div>
   </footer>
+
+  <!-- Bootstrap 5.3 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>
