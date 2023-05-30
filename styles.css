@@ -2,6 +2,15 @@
     background-color: #d3360b;
 }
 
+h2 {
+    margin-bottom: 1.5rem !important;
+}
+
+.w-58 {
+    width: 58%;
+}
+
 .footer {
-    background-color: #f0f0f0;
+    background-color: #dfe3e7;
+    border-top: 1px solid #b3bac2;
 }
