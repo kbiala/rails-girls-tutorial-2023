@@ -2,6 +2,10 @@
     background-color: #d3360b;
 }
 
+code {
+    color: #d3360b;
+}
+
 h2 {
     margin-bottom: 1.5rem !important;
 }
@@ -10,7 +14,18 @@ h2 {
     width: 58%;
 }
 
+.alert-danger {
+    background-color: #fcdcd4;
+    border-color: #d3360b;
+    color: #d3360b;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: keep-all
+}
+
 .footer {
-    background-color: #dfe3e7;
+    background-color: #fcd9cf;
     border-top: 1px solid #b3bac2;
 }
