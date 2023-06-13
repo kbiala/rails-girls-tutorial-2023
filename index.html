@@ -202,10 +202,8 @@
 
         <p>
           To make it look even better, we can also add some <strong>images</strong>. To do that, we need <code>img</code>
-          tag. To make it compatible with bootstrap, we'll check the full syntax in
-          <a href="https://getbootstrap.com/docs/5.2/components/card/#images" target="_blank">bootstrap documentation</a>.
-          Okay, now we know that our image tag will look as follows: <code>&lt;img src="..." class="card-img-top" alt="..." /&gt;</code>
-          and we need to put it inside <code>article</code> tag, before <code>card-header</code>. So let's do that.
+          tag, which looks like this: <code>&lt;img src="..." alt="" /&gt;</code>. We need to put it inside <code>article</code>
+          tag, before card main content. So let's do that.
         </p>
         <p>
           Now we need to replace <code>src="..."</code> with the URL link to our image, and <code>alt="..."</code> with
@@ -220,7 +218,7 @@
           After modifications our page should look like this:
         </p>
         <pre class="alert alert-danger">
-&lt;main class="p-5 bg-gray-100">
+&lt;main class="p-5 bg-gray-100"&gt;
   &lt;h1 class="text-2xl text-teal-700 font-bold mb-3">Rails Girls 2023&lt;/h1&gt;
 
   &lt;article class="bg-white border border-gray-300 rounded-lg shadow mb-3"&gt;

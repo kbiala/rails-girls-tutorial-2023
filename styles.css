@@ -1,5 +1,6 @@
 .header {
     background-color: #d3360b;
+    border-bottom: 1px solid #d3360b;;
 }
 
 code {
@@ -26,6 +27,6 @@ pre {
 }
 
 .footer {
-    background-color: #fcd9cf;
-    border-top: 1px solid #b3bac2;
+    background-color: #fcdcd4;
+    border-top: 1px solid #d3360b;
 }
