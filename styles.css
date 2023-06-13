@@ -1,14 +1,21 @@
 .header {
-    background-color: #d3360b;
-    border-bottom: 1px solid #d3360b;;
+    background-color: #da380b;
+}
+
+@media(min-width: 992px) {
+    .header .nav-link { padding: 8px 13px !important; }
 }
 
 code {
-    color: #d3360b;
+    color: #da380b;
 }
 
 h2 {
     margin-bottom: 1.5rem !important;
+}
+
+.w-49 {
+    width: 49%;
 }
 
 .w-58 {
@@ -17,8 +24,8 @@ h2 {
 
 .alert-danger {
     background-color: #fcdcd4;
-    border-color: #d3360b;
-    color: #d3360b;
+    border-color: #da380b;
+    color: #da380b;
 }
 
 pre {
@@ -28,5 +35,5 @@ pre {
 
 .footer {
     background-color: #fcdcd4;
-    border-top: 1px solid #d3360b;
+    border-top: 1px solid #da380b;
 }
