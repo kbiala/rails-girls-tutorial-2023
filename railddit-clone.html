@@ -154,6 +154,31 @@ end
           username field, so that users can sign their posts. So the&nbsp;command in our case will look as follows:<br />
           <code class="fw-bold">bin/rails&nbsp;generate&nbsp;scaffold&nbsp;Entry title:string content:text username:string tag:string</code>
         </p>
+        <p>
+          Can you recognise the files that were generated? Among them you should be able to see a&nbsp;new model (Entry.rb),
+          controller (EntriesController.rb), and views (views/entries directory). Notice how naming conventions differ
+          between models and controllers. Models are singular, controllers and views directory are plural. You'll follow
+          the&nbsp;same convention when generating your own code.
+        </p>
+        <p>
+          Let's check generated migration - you should be able to find it in db/migrate directory. If everything looks
+          okay to you, run <code class="fw-bold">bin/rails&nbsp;db:migrate</code> in the&nbsp;terminal to apply this migration.
+        </p>
+        <p class="alert alert-dark" role="alert">
+          <strong>Coach:</strong> Explain what migrations are and why we need them.
+        </p>
+        <p>
+          Restart your server and check the&nbsp;results in the&nbsp;browser. Spend a&nbsp;few minutes on playing with generated
+          views through the&nbsp;browser - create some entries, try to edit and delete them. Check how URLs look like. How is
+          the&nbsp;URL looks like when you display single entry, and how it looks when you display the&nbsp;list of all entries?
+        </p>
+
+        <h3 class="h4">Updating root path.</h3>
+        <p>
+          We want to display entries on the main page of our app. To do that, we need to update the&nbsp;root path.
+          go to config/routes.rb file and update it so that it looks as follows:
+          <code></code>
+        </p>
       </section>
 
       <hr class="my-5" />
