@@ -57,7 +57,7 @@
   <main class="bg-light text-dark py-5">
     <div class="container">
       <section>
-        <h2 class="h3">"Railddit" Clone</h2>
+        <h2 class="h3">"Railddit"</h2>
         <p>
           In this tutorial, we're going to create a&nbsp;simple social app, where users can post entries and score them.
           In the&nbsp;next steps, you can implement more features, like comments, user profiles with authorization,
@@ -131,7 +131,7 @@ end
         <h3 class="h4">Generating user entries.</h3>
         <p>
           One of the&nbsp;things that Rails provides out of the&nbsp;box is <strong>generators</strong>. It's a&nbsp;command
-          that for introducing a&nbsp;new resource into our application (eg. entries, users, posts, comments, products).
+          for introducing a&nbsp;new resource into our application (eg. entries, users, posts, comments, products).
           It generates a&nbsp;bunch of files necessary for representing and interacting with this resource, so that we
           don't have to create everything manually.
         </p>
@@ -290,6 +290,14 @@ end
 
       <hr class="my-5" />
 
+
+      <section>
+        <h3 class="h4">Let's talk about validating user data.</h3>
+        <p></p>
+      </section>
+
+      <hr class="my-5" />
+
       <section>
         <h3 class="h4">Let users add images to their entries.</h3>
         <p></p>
@@ -299,7 +307,34 @@ end
 
       <section>
         <h3 class="h4">Suggested next steps.</h3>
-        <p></p>
+        <p>
+          If you're done with all the&nbsp;tasks, you can try to add some more features to your app. Here are some
+          suggestions:
+        </p>
+        <ul>
+          <li>
+            Let users upload files from their computers. Check out
+            <a href="https://guides.rubyonrails.org/active_storage_overview.html" target="_blank">Rails Docs</a>
+            to learn more about uploading and setting up storage for images.
+          </li>
+          <li>
+            Add authentication, so that users can log in and out. Check out <a href="https://github.com/heartcombo/devise" target="_blank">Devise</a>
+            gem. You'll find a lot of useful tutorials online how to set up and use Devise gem. Just remember that you
+            follow instructions for Rails v7.
+          </li>
+          <li>
+            Add comments to entries. Check out <a href="https://guides.rubyonrails.org/getting_started.html#adding-a-second-model" target="_blank">Rails Docs</a>
+            to learn how to add a&nbsp;second resource associated with already existing one (in our case, comments
+            assigned to entries).
+          </li>
+          <li>
+            Once you have user accounts in your app, you can add authorization levels. For example, you can allow only
+            registered and logged in users to add entries, and only entry author to edit or delete&nbsp;it. There's a&nbsp;couple
+            of gems out there that will help you manage authorization. I suggest you check out
+            <a href="https://www.rubydoc.info/gems/pundit" target="_blank">Pundit</a> or
+            <a href="https://github.com/CanCanCommunity/cancancan/blob/develop/docs/README.md" target="_blank">CanCanCan</a>.
+          </li>
+        </ul>
       </section>
 
       <hr class="my-5" />
