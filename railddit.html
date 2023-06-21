@@ -290,6 +290,130 @@ end
 
       <section>
         <h3 class="h4">Let's add scoring feature.</h3>
+        <p>
+          One of the main features we want in our app is scoring. We want users to be able to score entries by clicking
+          on icons, up or down. We'll start with adding score attribute, that will store current score of each entry.
+        </p>
+        <h4 class="h5">First: migration.</h4>
+        <p>
+          Because we already have entries resource with model, views and controller, this time we'll use a different
+          generator - migration generator, that will add new attribute to our entries table in database. The syntax of
+          this generator looks like this: <code>bin/rails generate migration AddAttributeNameToTableName attribute_name:attribute_type</code>.
+          So in our case we'll run: <code class="fw-bold">bin/rails generate migration AddScoreToEntries score:integer</code>.
+          Let's open generated file in db/migrate folder. If we made some mistake, we can fix it now manually. If everything
+          looks okay, we can apply the migration with <code class="fw-bold">bin/rails db:migrate</code> command.
+        </p>
+        <h4 class="h5">Add score and arrows to entry view.</h4>
+        <p>
+          Now, let's display the score in our entries, and let's add the arrows that we'll later use for increasing
+          and descresing score. I added a separate column to my _entry view and added classes to display score+arrows
+          on the left, and the rest of the entry on the right. I also used svg images to display arrows, but you can use
+          simple icons if you prefer. My _entry.html.erb file now looks like this:
+        </p>
+        <pre class="alert alert-danger">
+&lt;article id="<%= dom_id entry %>" class="flex overflow-hidden border border-gray-300 bg-white rounded-md shadow mb-3"&gt;
+  &lt;div class="flex-none text-center bg-gray-50 font-bold w-10 pt-3"&gt;
+    &lt;div&gt;
+      &lt;%= image_tag("arrow-up.svg", width: "16", class: "mx-auto") %&gt;
+    &lt;/div&gt;
+    &lt;div class="my-2 text-xs"&gt;
+      &lt;%= entry.score %&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;%= image_tag("arrow-down.svg", width: "16", class: "mx-auto") %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex-auto p-4"&gt;
+    &lt;p class="text-xs text-gray-500 mb-3"&gt;
+      Posted by &lt;%= entry.username %&gt; &lt;%= entry.created_at %&gt;
+    &lt;/p&gt;
+
+    &lt;div class="mb-2"&gt;
+      &lt;h2 class="font-bold inline-block"><%= entry.title %&gt;&lt;/h2&gt;
+      &lt;button class="bg-gray-400 hover:bg-gray-300 text-white py-1 px-2 rounded-full text-xs"&gt;
+        &lt;%= entry.tag %&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class="mb-3"&gt;
+      &lt;%= entry.content %&gt;
+    &lt;/div&gt;
+
+    &lt;% if action_name != "show" %&gt;
+      &lt;%= link_to "Show", entry, class: "inline-block font-bold text-xs text-gray-500 mr-3" %&gt;
+      &lt;%= link_to 'Edit', edit_entry_path(entry), class: "inline-block font-bold text-xs text-gray-500" %&gt;
+    &lt;% end %&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+        </pre>
+
+        <h4 class="h5">Define increase and descrease score methods.</h4>
+        <p>Open entries_controller and add: </p>
+        <pre class="alert alert-danger">
+class EntriesController < ApplicationController
+  before_action :set_entry, only: %i[ show edit update destroy <span class="fw-bold">increase_score decrease_score</span> ]
+  ...
+
+  <span class="fw-bold">def increase_score</span>
+  <span class="fw-bold">end</span>
+
+  <span class="fw-bold">def decrease_score</span>
+  <span class="fw-bold">end</span>
+
+  private
+  ..
+end
+        </pre>
+        <p>
+          Now let's add content of our actions. The first one, increase_score, should increase score by 1, and decrease_score
+          should decrease score by 1. So first, we need to change score, then we need to update the entry, and finally
+          we'll return new score - we'l need this value later. Our code should now look like this:
+        </p>
+        <pre class="alert alert-danger">
+  def increase_score
+    @entry.score += 1
+    @entry.save
+    render plain: @entry.score
+  end
+        </pre>
+
+        <h4 class="h5">Routes for score methods.</h4>
+        <p>In config/routes.rb:</p>
+        <pre class="alert alert-danger">
+Rails.application.routes.draw do
+  resources :entries do
+    <span class="fw-bold">get 'increase_score', on: :member</span>
+    <span class="fw-bold">get 'decrease_score', on: :member</span>
+  end
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Defines the root path route ("/")
+  root "entries#index"
+end
+        </pre>
+
+        <h4 class="h5">Add JS controller.</h4>
+        <p>
+          Create a new file in app/javascript/controllers called scores_controller.js and add two methods inside.
+        </p>
+        <pre class="alert alert-danger">
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+  up(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    console.log("Arrow up clicked")
+  }
+
+  down(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    console.log("Arrow down clicked")
+  }
+}
+        </pre>
       </section>
 
       <hr class="my-5" />
