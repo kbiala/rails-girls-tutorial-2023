@@ -137,8 +137,8 @@ end
         </p>
         <p>
           There are several types of generators. For a&nbsp;start, we're going to use <strong>scaffold generator</strong>,
-          that will create the&nbsp;whole package for us: a&nbsp;model, views, routes and controller with basic actions
-          (creating, reading, updating and destroying data, CRUD in short).
+          that will create the&nbsp;whole package for us: a&nbsp;model (with migration), views, routes and controller with basic
+          actions (creating, reading, updating and destroying data, CRUD in short).
         </p>
         <p>
           Before moving further, open another terminal tab and type: <code>bin/rails&nbsp;tailwindcss:watch</code>.
@@ -291,13 +291,13 @@ end
       <section>
         <h3 class="h4">Let's add scoring feature.</h3>
         <p>
-          One of the main features we want in our app is scoring. We want users to be able to score entries by clicking
+          One of the&nbsp;main features we want in our app is scoring. We want users to be able to score entries by clicking
           on icons, up or down. We'll start with adding score attribute, that will store current score of each entry.
         </p>
         <h4 class="h5">First: migration.</h4>
         <p>
-          Because we already have entries resource with model, views and controller, this time we'll use a different
-          generator - migration generator, that will add new attribute to our entries table in database. The syntax of
+          Because we already have entries resource with model, views and controller, this time we'll use a&nbsp;different
+          generator - migration generator, that will add a&nbsp;new attribute to our entries table in database. The syntax of
           this generator looks like this: <code>bin/rails generate migration AddAttributeNameToTableName attribute_name:attribute_type</code>.
           So in our case we'll run: <code class="fw-bold">bin/rails generate migration AddScoreToEntries score:integer</code>.
           Let's open generated file in db/migrate folder. If we made some mistake, we can fix it now manually. If everything
@@ -305,9 +305,9 @@ end
         </p>
         <h4 class="h5">Add score and arrows to entry view.</h4>
         <p>
-          Now, let's display the score in our entries, and let's add the arrows that we'll later use for increasing
-          and descresing score. I added a separate column to my _entry view and added classes to display score+arrows
-          on the left, and the rest of the entry on the right. I also used svg images to display arrows, but you can use
+          Now, let's display the score in our entries, and let's add the&nbsp;arrows that we'll later use for increasing and
+          descresing score. I added a&nbsp;separate column to my _entry view and added classes to display score+arrows on the&nbsp;left,
+          and the&nbsp;rest of the&nbsp;entry on the&nbsp;right. I also used svg images to display arrows, but you can use
           simple icons if you prefer. My _entry.html.erb file now looks like this:
         </p>
         <pre class="alert alert-danger">
@@ -366,9 +366,10 @@ class EntriesController < ApplicationController
 end
         </pre>
         <p>
-          Now let's add content of our actions. The first one, increase_score, should increase score by 1, and decrease_score
-          should decrease score by 1. So first, we need to change score, then we need to update the entry, and finally
-          we'll return new score - we'l need this value later. Our code should now look like this:
+          The first one, increase_score, should increase entry's score by 1, and decrease_score should decrease entry's
+          score by 1. Now let's add content of our actions. So first, we need to recalculate entry's score, then we need to
+          save a&nbsp;new score in db (to make it permanent), and finally we'll return a&nbsp;new score - we'll need this value later.
+          Our code should now look like this:
         </p>
         <pre class="alert alert-danger">
   def increase_score
@@ -377,9 +378,21 @@ end
     render plain: @entry.score
   end
         </pre>
+        <p>
+          The last line returns the&nbsp;new score as plain text. Every Rails controller must either redirect to other controller
+          method, or return something: html (view), json (data), or plain text (string). We chose the last option, because
+          we'll use this score string in our JS controller in a&nbsp;moment.
+        </p>
+        <p>
+          Do the same for the second method.
+        </p>
 
         <h4 class="h5">Routes for score methods.</h4>
-        <p>In config/routes.rb:</p>
+        <p>
+          Every controller action needs to have a&nbsp;route that connects URL with the&nbsp;controller&nbsp;&&nbsp;action that processes
+          the&nbsp;request. When we used scaffold for entries at the&nbsp;beginning of this tutorial, routes were generated automatically
+          for us. Now we need to add them manually. So let's open the contig/routes.rb file and add update as follows:
+        </p>
         <pre class="alert alert-danger">
 Rails.application.routes.draw do
   resources :entries do
@@ -392,10 +405,34 @@ Rails.application.routes.draw do
   root "entries#index"
 end
         </pre>
+        <p>
+          We've put the&nbsp;new lines inside <code>:entries</code> block, so the&nbsp;new routes will be captured by entries controller.
+          The&nbsp;first word in the&nbsp;line is the <a href="https://www.w3schools.com/tags/ref_httpmethods.asp" target="_blank">HTTP method</a>,
+          and the&nbsp;second one is the&nbsp;name of the action in entries controller. The <code>on:&nbsp;:member</code> part means that
+          the&nbsp;route will be generated for every single entry, not for the&nbsp;whole collection (group of entries), like eg. index action.
+          We can check our routes by running <code>rails routes</code> command in the&nbsp;terminal. Check various ways of defining routes
+          in <a href="https://guides.rubyonrails.org/routing.html" target="_blank">Rails routing guide</a>.
+        </p>
 
         <h4 class="h5">Add JS controller.</h4>
         <p>
-          Create a new file in app/javascript/controllers called scores_controller.js and add two methods inside.
+          Now, we want to call our Rails methods dynamically, without reloading the&nbsp;page. There's a&nbsp;couple of ways to
+          achieve this result. In this tutorial we'll use StimulusJS. It's a&nbsp;small JavaScript (JS) framework that allows
+          us to add interactivity to our Rails views. It's easy to use, and already installed in your Rails app, configured,
+          and ready to use. First, we need to create a&nbsp;Stimulus (JS) controller. Create a&nbsp;new file in app/javascript/controllers
+          called scores_controller.js and add basic default structure inside:
+        </p>
+        <pre class="alert alert-danger">
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+  // our code will go here
+}
+        </pre>
+        <p>
+          We'll also need two methods that will be called when user clicks on the&nbsp;up or down arrow. Let's add them, and
+          let's put <code>console.log()</code> lines inside that will print out something in the&nbsp;browser console. This way
+          we'll see if the methods are called correctly. Our JS controller should now look like this:
         </p>
         <pre class="alert alert-danger">
 import { Controller } from "@hotwired/stimulus"
@@ -414,6 +451,107 @@ export default class extends Controller {
   }
 }
         </pre>
+
+        <h4 class="h5">Connect JS controller with view.</h4>
+        <p>
+          We now need to connect arrows in views with up() and down() functions in JS controller. To achieve this, we need
+          add code in our entry view. Let's open _entry.html.erb file, and add <code>data-controller=''</code> property to div
+          that contains arrows like this:
+          <code>&lt;div class="flex-none text-center bg-gray-50 font-bold w-10 pt-3" <span class="fw-bold">data-controller='scores'</span>&gt;</code>.
+          Value of this property will be the same as the&nbsp;name of our JS controller (scores in our case).
+        </p>
+        <p>
+          Secondly, we need to add a&nbsp;link tag around every arrow, with <code>data-action</code> property. This property will be called after
+          JS controller, function inside it (in our case, it's <em>up</em> or <em>down</em>), and will also say in which situation
+          it should be triggered (in our case, after click). So the code will look like this:
+        </p>
+        <pre class="alert alert-danger">
+&lt;%= link_to '/', class: 'block', remote: true, 'data-action': 'click->scores#up' do %&gt;
+  &lt;%= image_tag("arrow-up.svg", width: "16", class: "mx-auto") %&gt;
+&lt;% end %&gt;
+        </pre>
+        <p>
+          Do the&nbsp;same for the&nbsp;second arrow.
+        </p>
+        <p>
+          We can now test our code. Run Rails server, open browser console, and click on the&nbsp;arrows. You should see
+          the&nbsp;text generated by console.log method.
+        </p>
+
+        <h4 class="h5">Connect JS controller with Rails controller.</h4>
+        <p>
+          We have JS controller and views correctly connected to it, so now we need to connect JS with increase_ and
+          decrease_score methods. First we'll add <code>data-scores-id-value=""</code> and <code>data-scores-target=""</code>
+          to _entry.html.erb. The&nbsp;first one will tell JS which entry we're working on, so we need to include entry id as
+          its value like this:
+        </p>
+        <pre class="alert alert-danger">
+&lt;div class="flex-none text-center bg-gray-50 font-bold w-10 pt-3" data-controller='scores' <span class="fw-bold">data-scores-id-value="&lt;%=entry.id%&gt;</span>"&gt;
+        </pre>
+        <p>
+          The&nbsp;second one will tell JS method where to put the&nbsp;new score value after we update it. We need to call this place
+          somehow (I used <em>sum</em> name, but feel free to use a&nbsp;better name). So the&nbsp;code will look like this:
+        </p>
+        <pre class="alert alert-danger">
+&lt;div class="my-2 text-xs" <span class="fw-bold">data-scores-target="sum"</span>&gt;
+  &lt;%= entry.score %&gt;
+&lt;/div&gt;
+        </pre>
+        <p>
+          We also need to add a&nbsp;related code inside JS scores controller:
+        </p>
+        <pre class="alert alert-danger">
+export default class extends Controller {
+  <span class="fw-bold">static targets = [ "sum" ]</span>
+  <span class="fw-bold">static values = { id: Number }</span>
+  ...
+}
+        </pre>
+
+        <p>
+          The&nbsp;last step. We need to update JS controller. Let's start with up() function. Start below console.log line.
+          Add auxiliary variables - first one will store entry id, second one will store url of increase_score method, and
+          the&nbsp;last one will point to the&nbsp;place in html where we display the&nbsp;score. We'll use them later.
+        </p>
+        <pre class="alert alert-danger">
+let id = this.idValue
+let url = `/entries/${id}/increase_score`
+let scoreSum = this.sumTarget
+        </pre>
+
+        <p>
+          Now we'll add a&nbsp;JS <code>fetch</code> method that connects to Rails method and receives and processes the&nbsp;result.
+          Here's the&nbsp;general syntax of the&nbsp;fetch method:
+        </p>
+        <pre class="alert alert-danger">
+fetch(url).then((response) => response.text()).then(response => {
+  // handle the&nbsp;response
+})
+        </pre>
+        <p>
+          We can add <code>console.log</code> inside, to see the&nbsp;response from Rails controller:
+        </p>
+        <pre class="alert alert-danger">
+fetch(url).then((response) => response.text()).then(response => {
+  console.log(response)
+})
+        </pre>
+        <p>
+          It should show the&nbsp;updated score. Now we just need to put it back in _entry.html.erb view. We'll use
+          scoreSum variable that we created before like this:
+        </p>
+        <pre class="alert alert-danger">
+fetch(url).then((response) => response.text()).then(response => {
+  scoreSum.textContent = response
+})
+        </pre>
+        <p>
+          It replaces currently displayed (old) score, with the&nbsp;new one.
+        </p>
+        <p>
+          Time to test the&nbsp;code in the&nbsp;browser! If everything works as expected, you can remove <code>console.log</code>
+          lines - we no longer need them. And the&nbsp;score feature is ready.
+        </p>
       </section>
 
       <hr class="my-5" />
@@ -470,7 +608,56 @@ end
 
       <section>
         <h3 class="h4">Let users add images to their entries.</h3>
-        <p></p>
+        <p>
+          We'll let users to add images to their entries. For a start, we'll choose a simpler approach. So in our system we'll only
+          store URLs to images that have already been uploaded to the Internet somewhere. I suggest to add full upload feature
+          as an&nbsp;extra task after you get familiar with Rails.
+        </p>
+        <p>
+          Same us in score feature, we need to start with a migration. Take a look at the syntax, and try to generate a command.
+        </p>
+        <p>
+          Once you generate the migration, it's good practice to check it's content in db/migrate folder. You should see
+          something similar to the following:
+        </p>
+        <pre class="alert alert-danger">
+class AddImageUrlToEntries < ActiveRecord::Migration[7.0]
+  def change
+    add_column :entries, :image_url, :string
+  end
+end
+        </pre>
+        <p>If everything looks correct, you can apply migration by running <code>bin/rails db:migrate</code>.</p>
+
+        <h4 class="h5">Add image_url field to entry form.</h4>
+        <p>Open app/views/entries/_form.html.erb and add:</p>
+        <pre class="alert alert-danger">
+&lt;div class="my-5"&gt;
+  &lt;%= form.label :image_url %&gt;
+  &lt;%= form.text_field :image_url, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %&gt;
+&lt;/div&gt;
+        </pre>
+        <p>
+          Add image_url to entry_params in entries_controller:
+          <code>params.require(:entry).permit(:title, :content, :username, :tag, <span class="fw-bold">:image_url</span>)</code>
+        </p>
+
+        <h4 class="h5">Display image in entry view.</h4>
+        <p>
+          Let's open _entry.html.erb view and add an image with image_tag tag:
+          <code>&lt;%= image_tag entry.image_url %&gt;</code>
+        </p>
+        <p>
+          Notice that the image is not correctly displayed if the image is not present. We can fix that by adding
+          <code>if</code> statement. We'll use <code>present?</code> method again, so the code will look like this:
+        </p>
+        <pre class="alert alert-danger">
+&lt;div class="mb-3"&gt;
+  &lt;% if entry.image_url %&gt;
+    &lt;%= image_tag entry.image_url %&gt;
+  &lt;% end %&gt;
+&lt;/div&gt;
+        </pre>
       </section>
 
       <hr class="my-5" />
