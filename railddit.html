@@ -75,10 +75,10 @@
         <h3 class="h4">Creating a&nbsp;new app.</h3>
         <p>
           Go to the&nbsp;terminal in your Codespace and run the&nbsp;following command:
-          <code class="fw-bold">bin/rails new&nbsp;.&nbsp;--tailwind</code><br />
+          <code class="fw-bold">bin/rails new&nbsp;.&nbsp;--css tailwind</code><br />
           <small>
             If you're working on your local machine, replace dot with your application name, eg.:
-            <code>bin/rails new&nbsp;railddit&nbsp;--tailwind</code>
+            <code>bin/rails new&nbsp;railddit&nbsp;--css tailwind</code>
           </small>
         </p>
         <p>
@@ -148,7 +148,7 @@ end
         </p>
         <p>
           We can check rails scaffold generator syntax in <a href="https://guides.rubyonrails.org/generators.html" target="_blank">Rails documentation</a>.
-          It looks as follows: <code>bin/rails&nbsp;generate&nbsp;scaffol&nbsp;ModelName&nbsp;field:type</code>.<br/>
+          It looks as follows: <code>bin/rails&nbsp;generate&nbsp;scaffold&nbsp;ModelName&nbsp;field:type</code>.<br/>
           We'll call the&nbsp;main resource in the&nbsp;app <strong>entries</strong>. We want them to have a&nbsp;title, content
           and a&nbsp;tag. We won't create real users at this point (you can add this feature later), but we'll add
           username field, so that users can sign their posts. So the&nbsp;command in our case will look as follows:<br />
