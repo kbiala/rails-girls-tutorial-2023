@@ -15,11 +15,10 @@
 
 <body>
   <header class="header text-white py-4">
-    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-xl" data-bs-theme="dark">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <img src="https://railsgirls.com/images/railsgirls-logo.png" alt="Logo" height="20" class="d-inline-block align-text-top me-2">
-          <h1 class="d-inline-block h5 mb-0">Tutorial</h1>
+          <h1 class="d-inline-block h5 mb-0">Rails Workshops Tutorial</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -27,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="index.html#tools">Tools</a>
+              <a class="nav-link" href="index.html#intro">Intro</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="index.html#internet">How Internet Works</a>
@@ -150,9 +149,8 @@ end
           We can check rails scaffold generator syntax in <a href="https://guides.rubyonrails.org/generators.html" target="_blank">Rails documentation</a>.
           It looks as follows: <code>bin/rails&nbsp;generate&nbsp;scaffold&nbsp;ModelName&nbsp;field:type</code>.<br/>
           We'll call the&nbsp;main resource in the&nbsp;app <strong>entries</strong>. We want them to have a&nbsp;title, content
-          and a&nbsp;tag. We won't create real users at this point (you can add this feature later), but we'll add
-          username field, so that users can sign their posts. So the&nbsp;command in our case will look as follows:<br />
-          <code class="fw-bold">bin/rails&nbsp;generate&nbsp;scaffold&nbsp;Entry title:string content:text username:string tag:string</code>
+          and a&nbsp;tag. So the&nbsp;command in our case will look as follows:<br />
+          <code class="fw-bold">bin/rails&nbsp;generate&nbsp;scaffold&nbsp;Entry title:string content:text tag:string</code>
         </p>
         <p>
           Can you recognise the files that were generated? Among them you should be able to see a&nbsp;new model (Entry.rb),
@@ -222,8 +220,8 @@ end
           </li>
           <li>remove horizontal line (<code>&lt;hr/&gt;</code>)</li>
           <li>
-            move username (<code>&lt;%= entry.username %&gt;</code>) to the&nbsp;top of the&nbsp;card and add creation
-            date next to it (the&nbsp;entry attribute that stores this information is called created_at)
+            add creation date at the top of the&nbsp;card (the&nbsp;entry attribute that stores this information is
+            called created_at)
           </li>
           <li>display entry title in <code>h2</code> tag, and make it bold</li>
           <li>
@@ -234,8 +232,10 @@ end
           </li>
           <li>
             change colors of "Show" and "Edit" links to dark gray, and make them smaller (google Tailwind classes for
-            font size and color); do the same for username and creation date
-          <li>adjust margins to your liking (<code>mb-X</code> and <code>my-X</code> classes)</li>
+            font size and color); do the same for creation date
+          <li>
+            adjust margins to your liking (<code>mb-X</code> and <code>my-X</code> classes)
+          </li>
         </ul>
         <p class="alert alert-dark" role="alert">
           <strong>Coach:</strong> Help with explaining, adding and editing Ruby tags.
@@ -264,7 +264,7 @@ end
         <pre class="alert alert-danger">
 &lt;article id="&lt;%= dom_id entry %&gt;" class="border border-gray-300 bg-white rounded-md shadow p-4 mb-3"&gt;
   &lt;div class="text-xs text-gray-500 mb-3"&gt;
-    Posted by &lt;%= entry.username %&gt; &lt;%= entry.created_at %&gt;
+    Posted on &lt;%= entry.created_at %&gt;
   &lt;/div&gt;
 
   &lt;div class="mb-2"&gt;
@@ -326,7 +326,7 @@ end
 
   &lt;div class="flex-auto p-4"&gt;
     &lt;p class="text-xs text-gray-500 mb-3"&gt;
-      Posted by &lt;%= entry.username %&gt; &lt;%= entry.created_at %&gt;
+      Posted on &lt;%= entry.created_at %&gt;
     &lt;/p&gt;
 
     &lt;div class="mb-2"&gt;
@@ -614,11 +614,12 @@ end
           as an&nbsp;extra task after you get familiar with Rails.
         </p>
         <p>
-          Same us in score feature, we need to start with a migration. Take a look at the syntax, and try to generate a command.
+          The beginning is similar to what we did in scores feature - we need to generate a&nbsp;migration. Take a&nbsp;look
+          at the syntax above, and try to generate a&nbsp;command yourself.
         </p>
         <p>
-          Once you generate the migration, it's good practice to check it's content in db/migrate folder. You should see
-          something similar to the following:
+          Once you generate the&nbsp;migration, it's good practice to check it's content in db/migrate folder before applying it.
+          You should see something similar to the&nbsp;following lines:
         </p>
         <pre class="alert alert-danger">
 class AddImageUrlToEntries < ActiveRecord::Migration[7.0]
@@ -637,9 +638,14 @@ end
   &lt;%= form.text_field :image_url, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %&gt;
 &lt;/div&gt;
         </pre>
+
+        <h4 class="h5">Allow users to edit image_url field.</h4>
         <p>
           Add image_url to entry_params in entries_controller:
-          <code>params.require(:entry).permit(:title, :content, :username, :tag, <span class="fw-bold">:image_url</span>)</code>
+          <code>params.require(:entry).permit(:title, :content, :tag, <span class="fw-bold">:image_url</span>)</code>
+          This will allow users to save image_url to database. We always need to specify which attributes are allowed
+          to be edited by users. Read more about strong parameters
+          <a href="https://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters">here</a>.
         </p>
 
         <h4 class="h5">Display image in entry view.</h4>
@@ -663,7 +669,7 @@ end
       <hr class="my-5" />
 
       <section>
-        <h3 class="h4">Suggested next steps.</h3>
+        <h3 class="h4">Suggested next steps for your app.</h3>
         <p>
           If you're done with all the&nbsp;tasks, you can try to add some more features to your app. Here are some
           suggestions:
@@ -678,6 +684,11 @@ end
             Add authentication, so that users can log in and out. Check out <a href="https://github.com/heartcombo/devise" target="_blank">Devise</a>
             gem. You'll find a lot of useful tutorials online how to set up and use Devise gem. Just remember that you
             follow instructions for Rails v7.
+          </li>
+          <li>
+            Once you have user accounts, try to connect them to entries. So that each entry is assigned (belongs) to a&nbsp;user.
+            Read about <a href="https://guides.rubyonrails.org/association_basics.html" target="_blank">Active Record Associations</a>.
+            After that you can display user who is an author of the&nbsp;entry in the&nbsp;entry view.
           </li>
           <li>
             Add comments to entries. Check out <a href="https://guides.rubyonrails.org/getting_started.html#adding-a-second-model" target="_blank">Rails Docs</a>
@@ -696,7 +707,7 @@ end
 
       <hr class="my-5" />
 
-      <p class="fw-bold">Want to keep learning? Check out <a href="index.html#materials">these links</a>.</p>
+      <p class="lead fw-bold">Want to keep learning? Check out <a href="index.html#materials">these links</a>.</p>
     </div>
   </main>
 

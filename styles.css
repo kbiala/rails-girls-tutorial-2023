@@ -2,7 +2,7 @@
     background-color: #da380b;
 }
 
-@media(min-width: 992px) {
+@media(min-width: 1200px) {
     .header .nav-link { padding: 8px 13px !important; }
 }
 

@@ -15,19 +15,18 @@
 
 <body>
   <header class="header text-white py-4">
-    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-xl" data-bs-theme="dark">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <img src="https://railsgirls.com/images/railsgirls-logo.png" alt="Logo" height="23" class="d-inline-block align-text-top me-2">
-          <h1 class="d-inline-block h5 mb-0">Tutorial</h1>
+          <h1 class="d-inline-block h5 mb-0">Rails Workshops Tutorial</h1>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarDropdown">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#tools">Tools</a>
+              <a class="nav-link" href="#intro">Intro</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#internet">How Internet Works</a>
@@ -56,18 +55,63 @@
 
   <main class="bg-light text-dark py-5">
     <div class="container">
-      <section id="tools">
-        <h2 class="h3">Tools</h2>
+      <section id="intro">
+        <h2 class="h3">Intro</h2>
         <p>
-          To save time on setup, during this workshops we're going to use online tools, like Web3Schools editor,
-          and Github Codespaces. The&nbsp;only thing you're going to need is a&nbsp;web browser of your choice.
+          This is a&nbsp;Rails Tutorial I'm using during Rails Girls workshops. Depending on the&nbsp;time we have, we're going
+          to try a&nbsp;little bit of HTML, CSS, Ruby and Rails. I encourage you to try the&nbsp;whole tutorial in your free time,
+          or pick up where we left and expand your app. At the&nbsp;bottom of the&nbsp;page you'll find links to materials and
+          resources, so that you can keep learning if you, like me, think that Rails is a&nbsp;really cool framework :)
+        </p>
+
+        <h3 class="h4">Tools</h3>
+        <p>
+          To save time on setup, during this workshops we're going to use online tool - Github Codespaces, which already
+          contains everything we need: IDE, database, git, Ruby and Rails. The&nbsp;only thing you're going to need
+          is a&nbsp;web browser of your choice.
         </p>
         <p>
           On RailsGirls website you can find tutorials for setting up your local environment. See:
           <a href="https://guides.railsgirls.com/tools" target="_blank">Tools Guide</a> and
           <a href="https://guides.railsgirls.com/install" target="_blank">Rails installation Guide</a>.
         </p>
+        <h3 class="h4">Github Codespaces Setup</h3>
+        <p>
+          If you're using your local machine, you can skip this step and move to the next section.
+        </p>
+        <p>
+          First, you need to create your own
+          <a href="https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home" target="_blank">Github account</a>.
+        </p>
+        <p class="alert alert-dark" role="alert">
+          <strong>Coach:</strong> Help attendees to create and log in to their Github accounts. Explain briefly what is
+          Github and what how Codespaces feature works.
+        </p>
+        <p>
+          Please open <a href="https://github.com/kbiala/codespace-start" target="_blank">starting repository</a>, then
+          click on "Use this template" and "Create a&nbsp;new repository" buttons. You can name your repository however you want,
+          repository name will also be a&nbsp;name of your Rails app.
+        </p>
+        <p class="alert alert-dark" role="alert">
+          <strong>Coach:</strong> Explain available options (repository owner, description, public vs. private).
+        </p>
+        <p class="p-lg-4 bg-white rounded border overflow-hidden">
+          <img class="w-100" src="gh-instruction.png" />
+        </p>
+        <p>
+          Once you've got your repository created, click on "Code" button, "Codespaces" tab, and select "Create codespace
+          on main" option. It will take a&nbsp;few minutes to install all tools on your Codespace for the&nbsp;first time. Once
+          it's done, you can move to the&nbsp;next step.
+        </p>
+        <p class="alert alert-dark" role="alert">
+          <strong>Coach:</strong> Explain Codespace working area (editor, terminal, files explorer). Explain how to open
+          and close existing Codespace.
+        </p>
+      </section>
+
         <hr class="my-5" />
+
+      <section>
         <h2 class="h3">Roadmap</h2>
         <p class="mb-4">
           There're a&nbsp;lot of tools and languages one must learn to become a&nbsp;professional. During this workshop
@@ -101,13 +145,22 @@
       <section id="html">
         <h2 class="h3">Pure HTML</h2>
         <p>
-          To see how HTML document looks like, we're going to use web3schools editor.
-          Let's go to <a href="https://www.w3schools.com/html/" target="_blank">Web3Schools Tutorial</a> and click on
-          "Try it Yourself" button.
+          You're going to create your first static html page now. On your Codespace (or your local machine) create a&nbsp;new
+          directory for your html pages, and create a&nbsp;new file called <code>index.html</code> inside it.
         </p>
         <p>
-          I encourage you to do the whole tutorial in your free time, but for now we're going to focus on the basics.
+          Add a basic HTML structure to your file:
         </p>
+        <pre class="alert alert-danger">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
 
         <p class="alert alert-dark" role="alert">
           <strong>Coach:</strong> Explain the two main parts of HTML <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code>.
@@ -259,7 +312,7 @@
         <h2 class="h3 mb-4">Static vs. Dynamic Pages</h2>
         <p>
           In the&nbsp;example above, if we want to add another article to our blog, we need to manually edit the&nbsp;source code (html).
-          This is called a&nbsp;static page. It's a&nbsp;page that doesn't change unless we change it manually.
+          This is called a&nbsp;static page. It's a&nbsp;page that doesn't change unless we change the&nbsp;code manually.
         </p>
         <p class="mb-4">
           For dynamically generated pages, we need a&nbsp;database (a&nbsp;place where we store raw data), and a&nbsp;web engine (eg. Rails),
@@ -269,7 +322,8 @@
           <img class="w-100" src="client-server-db.png" />
         </p>
         <p class="alert alert-dark" role="alert">
-          <strong>Coach:</strong> Explain how pages with dynamically generated content work.
+          <strong>Coach:</strong> Explain how pages with dynamically generated content work, and how it's different
+          from static html pages. What is database needed for?
         </p>
       </section>
 
@@ -283,51 +337,16 @@
           written in, so it will be useful to know its basic concepts.
         </p>
 
-        <h3 class="h5 mt-5">Codespace Setup</h3>
-        <p>
-          In this tutorial we're going to use Github Codespaces, with Ruby 3.1 installed on it. If you're using your local
-          machine, you can skip this step and move to Ruby Tutorial section.
-        </p>
-        <p>
-          First, you need to create your own
-          <a href="https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home" target="_blank">Github account</a>.
-        </p>
-        <p class="alert alert-dark" role="alert">
-          <strong>Coach:</strong> Help attendees to create and log in to their Github accounts. Explain briefly what is
-          Github and what how Codespaces feature works.
-        </p>
-        <p>
-          Please open <a href="https://github.com/kbiala/codespace-start" target="_blank">starting repository</a>, then
-          click on "Use this template" and "Create a&nbsp;new repository" buttons. You can name your repository however you want,
-          repository name will also be a&nbsp;name of your Rails app.
-        </p>
-        <p class="alert alert-dark" role="alert">
-          <strong>Coach:</strong> Explain available options (repository owner, description, public vs. private).
-        </p>
-        <p class="p-lg-4 bg-white rounded border overflow-hidden">
-          <img class="w-100" src="gh-instruction.png" />
-        </p>
-        <p>
-          Once you've got your repository created, click on "Code" button, "Codespaces" tab, and select "Create codespace
-          on main" option. It will take a&nbsp;few minutes to install all tools on your Codespace for the&nbsp;first time. Once
-          it's done, you can move to the&nbsp;next step.
-        </p>
-        <p class="alert alert-dark" role="alert">
-          <strong>Coach:</strong> Explain Codespace working area (editor, terminal, files explorer). Explain how to open
-          and close existing Codespace.
-        </p>
-
         <h3 class="h5 mt-5">Ruby Tutorial</h3>
         <p>
-          Let's start coding! I suggest creating a&nbsp;"scripts" directory in files explorer,
-          where you'll store your scripts. Then open
-          <a href="https://guides.railsgirls.com/ruby-intro" target="_blank">Ruby Tutorial</a> in a&nbsp;new card and follow
-          the&nbsp;instructions.
+          Let's start coding! Create a&nbsp;"scripts" directory in files explorer in your Codespace (or your local machine),
+          where you'll store your Ruby scripts. Then open <a href="https://guides.railsgirls.com/ruby-intro" target="_blank">Ruby Tutorial</a>
+          in a&nbsp;new card and follow the&nbsp;instructions.
         </p>
         <p>
           Alternatively, you can use <a href="https://try.ruby-lang.org/" target="_blank">TryRuby</a> tutorial to get
-          yourself familiar with the&nbsp;basic concepts of Ruby language: data types, variables, conditions, methods,
-          classes and objects, loops.
+          yourself familiar with the&nbsp;basic concepts of Ruby language: data types, variables, conditions, methods, loops,
+          classes and objects.
         </p>
       </section>
 
